@@ -242,12 +242,49 @@ group by categoryID -- GROUP BY UNUTUYORSUN : AYNI DEĞERE SAHİP KAYITLARI GRUP
 
 SELECT*,COALESCE(REGİON,'-') AS NULLOLANLARAÇİZGİLER FROM CUSTOMERS --COALESCE() SQL'de NULL (değeri olmayan) alanların yerine istediğimiz bir değer göstermek için kullanılır
 
-SELECT*,
-CASE WHEN unitprice <20 then 'ucuz'
+SELECT*, --case burda koşulu kontrol eder
+CASE WHEN unitprice <20 then 'ucuz' --eğer buysa then ucuz yaz
 when unitprice >=20 and unitprice<=60 then 'normla'
 else 'pahallı'
-end as fiyatdurum
+end as fiyatdurum -- end case yapısı bitti demek 
 from products
 
+--barkod yapısı:
+
+1			00001		1 5-1 = 4
+12			00012		2 5-2=3
+123			00123
+1234		01234
+12345		12345
+
+select 123
+select str(123)
+select ltrim(str(123))
+select 5-len(ltrim(str(123))) --5 - 123 sayıdan stringe sonra soldaki boşlukları kaldır sonra len ile karekter sayısını bul ve 5 den çikar 
+
+select right(concat('00000000',ltrim(str(1))),5) ---sağdan 5 karakter al
+select right(concat('00000',ltrim(str(12))),5)
+select right(concat('000000',ltrim(str(123))),5)
+select right(concat('000000',ltrim(str(1234))),5)
+select right(concat('0000000',ltrim(str(12345))),5)
+
+select productId ,productName,
+right(concat('0000000000000',ltrim(str(productID))),10)as barkodnum from products --sağdan 10 karekter al barkod numa göre o sayı değişebilir
+
+
+--ÖDEV VERİLDİ :
+--İNT X=5
+--İNT KALAN=X%2;(TEK:1 ÇİFT:0)
+--İF FOR WHİLE DO  KULLANILMAYACAK küçüktür büyüktütür de kullanılmayacak
+--HERHNAGİ YAZILIM DİLİNDE YAZABİLİRİZ
+--for id do kulanmadan karşılaştırma komudu kullanmadan bana kalanın tek mi çift mi olduğunu yazma
+
+
+--sql de case metodu ile yazmaya çalışalım ama productıd ilerin 2 ye bölümünden kalan tek mi çift mi olduğunu yazalım
+select productID,
+case when productId%2=1 then 'tek'
+when ProductID%2=0 then 'çift'
+ end  as çifttekbulma
+from products
 
 
