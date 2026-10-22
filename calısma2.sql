@@ -162,3 +162,92 @@ select floor(123.45),floor(-123.45)
 
 select ceiling(123.45),ceiling(-123.45)
 select pi();
+select sin(0),sin(pi()/2),sin(pi())
+select cos(0),cos(pi()/2),cos(pi())
+select ASCII('A')
+SELECT char(65)
+select CHARINDEX('a','kaitek akademi')
+select CHARINDEX('e','dilek soft',2)-- aramaya ikinci karakterlde başlama Arama 2 karakterden başlar ve e harfini 4 sırada bulur
+select charindex('e','dilek soft',3)--3 karakter → l ,4. karakter → e (bulundu)
+select concat('kaitek','akademi')
+select concat('dilek','soft')
+select concat('kaitek',' ','akademi')
+
+select FirstName,LastName,concat(FirstName,' ',LastName) AS fullName from Employees
+select str(65) --- sayıyı string e çevirir ve str varsayılan olarak 10 karakterlik alan kullanır o yuzden yanıdında buşluk bulunur 
+--Sonuç: '        65'
+select len('kaitek') --karekter sayısını bulmak
+select substring('dilek soft',2,3)-- 2 karekteriyle başla ve 3 karekter al 
+select lower('DİLEK')
+SELECT UPPER('dilek')
+select left ('kaitek',3)
+select right('dilek',3)
+select LTRIM('  KAİTEK   ')--SOLDAKİ BOŞLUKLARI KALDIR
+SELECT Rtrim('    diilek    ')--SAĞDAKİ BOŞLUKLARI KALDIR
+SELECT TRIM('   diilek   ')
+
+SELECT LTRIM(RTRIM('  DİLEK  ')) --SAĞ EV SOL BOŞLUKLARI KALDIR
+SELECT RTRIM(LTRIM('    DİLEK    '))
+SELECT *FROM STRING_SPLIT('KAİTEK AKADEMİ',' ') --Metni parçalara ayırır
+SELECT *FROM string_split('izmir,ankara,istanbul',',')--karakterine göre birbirinden ayırır
+select  replace('kaitek akademi','a','e')-- a harflerini e harfiyle değiştirir
+select reverse('dilek ersöz')
+
+select getdate()
+select day(getdate())
+select month(getdate())
+select year(getdate())
+
+select dateadd(year,1,'2017/08/25') as DATEADD -- 1 YIL ARTTIRDI
+SELECT DATEADD(MONTH,2,'2003/08/25') AS DATEADD-- 2 AY ARTTIR
+select dateadd(month,-2,'2018/03/4') as dateadd
+
+select DATEDIFF(YEAR,'2011/09/23','2017/08/2') as DATEDİFF -- İKİ TARİHİN ARASINDAKİ FARKI AL
+SELECT DATEDIFF(year, '2011/08/25', '2014/08/25') AS DateDiff
+SELECT DATEDIFF(MONTH,'2003/10/21','2014/12/28')AS DATEDİFF  --2014-2003 X12 +(12-10) TILLAR ARASINDAKİ FARK AY HESAPLAMASI VE 2 AYI DA EKLE 
+SELECT DATEDIFF(HOUR,'2017/08/25 07:00','2017/08/25 12:45') AS DATEDİFF--ARASINDAKİ SAAAT FARKLI
+SELECT DATEDIFF (YEAR,'1972/10/12',GETDATE())--ŞU AN Kİ ZAMAMANLA 1972 YILI ARASINDAKİ FARK
+select datediff(day,'1972/10/12', getdate())
+select datediff(HOUR,'2003/08/25',getdate())
+select datepart(year,'2017/08/25') as datePartint --tarihin yıl bilgilerini getir
+select datepart(yy,'2003/08/25') as dogumgunu
+select datepart (month,'2003/08/25') as monthbul
+select datepart(hour,'2003/08/25 08:36')as dogumsaat
+select datepart(minute,'2003/08/25 08:36')as dogumdakikdasıbul
+
+select min(unitPrice) from products
+select max(unitPrice) from products
+select avg(unitprice) from products
+select sum(unitPrice)from products
+select count(*)as Qty from products --prodcts tablosunda kaç satır olduğunu sayar
+select 
+min(unitprice) as minptice,
+max(unitprice)as maxprice,
+avg(unitprice) as ortprice,
+sum (unitPrice) as topprice,
+count(*)as satır,
+sum(unitprice)/count(*) as ortalamasalary
+from products
+
+
+select categoryId,
+min(unitprice)as min,
+max(unitprice)as max,
+avg(unitprice)as ort,
+sum(unitprice)as toplamm,
+count(*)as satır,
+sum(unitprice)/count(*)as avg2
+from products
+group by categoryID -- GROUP BY UNUTUYORSUN : AYNI DEĞERE SAHİP KAYITLARI GRUPLAR
+
+SELECT*,COALESCE(REGİON,'-') AS NULLOLANLARAÇİZGİLER FROM CUSTOMERS --COALESCE() SQL'de NULL (değeri olmayan) alanların yerine istediğimiz bir değer göstermek için kullanılır
+
+SELECT*,
+CASE WHEN unitprice <20 then 'ucuz'
+when unitprice >=20 and unitprice<=60 then 'normla'
+else 'pahallı'
+end as fiyatdurum
+from products
+
+
+
