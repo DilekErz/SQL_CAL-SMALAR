@@ -96,28 +96,66 @@ INSERT INTO Ogrenciler (Adi,Soyadi,IseGirisTarihi) values ('ayşe','fatma',getda
 
 
  --BİR SONRAKİ DERS:(20.10.2026) ferhat kaygusuz ile 
- SELECT *FROM ogrenciler
+ SELECT *FROM Ogrenciler
 
- UPDATE ogreniler SET adi='BÜŞRA'WHERE OgrenciId=3
- Update ogrenciler set ödeme=ödeme+100 wHERE ogrenciId=3 --insert delete update de tekrar tekrar çalıştırısak her sferinde para artar ,bunu önlemek için coment eklemek daha mantıklı 
+ UPDATE Ogrenciler SET Adi='BÜŞRA' WHERE OgrenciId=3  --id 3 olan SET Adi = 'Büşra': Adı Büşra olarak değiştir 
+ Update ogrenciler set odeme=odeme+100 wHERE ogrenciId=3 --insert delete update de tekrar tekrar çalıştırısak her sferinde para artar ,bunu önlemek için coment eklemek daha mantıklı 
+
   --eğer  where eklemezsek bütün satırları güncelliyor herşeyi aynı yapıyor bu da hataya sebep veriyor
   Update ogrenciler set adi='ahmet',soyadı='y' --hataya sebebiyet verecez unutme where yazmayı
 
   select *from ogrenciler where ogrencilerId in(2,3)
-   update ogrenciler set adi='busra', soyadı='x'where ogrenciId=3
-   update ogrenciler set ödeme=ödeme-100
- where oğrenciID in(2,3)
+   update ogrenciler set Adi='busra', soyadi='x' where ogrenciId=2
+   update ogrenciler set odeme=odeme-100 -- bütün kayıttardan -100 silecek
+ select* FROM ogrenciler where ogrenciID in(2,3)
+ update ogrenciler set odeme=odeme-50 where ogrenciID in(2,3) --ogrenciler tablosunda ödeme ksımını 50 tl çıkar ve güncelle SET ile ve 
+
 
  delete from ogrenciler where ogrenciID=3
  DELETE FROM ogrenciler --sakın bunu yapma bütün tabloyu sileriz
  --bu tip durumda ne yapacaz: task tan export data yapabilriz 
- update 
+ update ogrenciler set odeme=odeme-100 --tüm öğrencierin 100 tl cıkarır where yazmadığımız için
 
+ --Bir tablodan diğer bir tabloya tüm  kolonları kopyalama: INSERT INTO tablo2 SELECT * FROM tablo1 WHERE koşullar; 
+--Bir tablodan diğer bir tabloya bazı kolonları kopyalama: INSERT INTO tablo2 (kolon1, kolon2, kolon3, ...) SELECT kolon1, kolon2, kolon3, ... FROM tablo1 WHERE koşullar;
+INSERT INTO Ogrenciler2 select*from ogrenciler  --INSERT INTO ... SELECT:Var olan tabloya kayıt ekler
+select *INTO Ogrenciler2 from Ogrenciler --SELECT ... INTO → Yeni tablo oluşturur ve kayıtları içine kopyalar
+select*from Ogrenciler2
+
+select p.productName ,p.categoryID from Products p
+select c.categoryID,c.categoryName from categories c
+
+select p.productID ,p.ProductName,p. categoryID,
+c.categoryID ,c.categoryName from products p,categories c where p.CategoryID=c.CategoryID --İki tabloyu WHERE ile birleştirme
+select p.productName,c.categoryName from products p,categories c where p.categoryID=C.categoryID
 
  --fazla veri çekmek belleğimizi doldurur sql i yorar
 --join:
+SELECT p.productID ,p.productName ,p.CategoryID,c.categoryID,c.categoryName from products p INNER JOIN categories c ON p.categoryID=c.categoryID --İki tabloda kategori numarası eşleşen kayıtları getirir
 select p.productName,c.catagorieName 
-from products p INNER JOİN catagories c on p. catagoryId =c.catagoryId
+from products p INNER JOIN catagories c on p. catagoryId =c.catagoryId
+
+SELECT p.productName ,c.categoryName from products p Left join categories c on p.categoryID=c.CategoryID
+select p.productId ,p.productName,p.categoryID,c.categoryID,c.categoryName from products p left join categories c on p. categoryId=c.categoryId
+select p.productName,p.productId,p.categoryID,c.categoryId,c.categoryName from categories c right join products p on p.categoryId=c.CategoryID
+
+select*from Suppliers
+select p.productId ,p.productName, p.categoryID,p.supplierId,c.categoryId,c.categoryName,s.companyName from products p left join categories c on p.categoryId=c.categoryId inner join suppliers s on p.supplierID=s.supplierId--önce Products–Categories birleşimi, sonra Suppliers birleşimidir
 
 --union da ortak id li bulunduğunda ortak olandan bir tanesini siliyor 
 --ama union all yazdığımızda hepsini getiriyor
+select *from products where productID in(2,3)
+union--ki sorgunun sonuçlarını birleştirir ve tekrar eden satırları kaldırır
+select*from products where productId in (10,19) 
+SELECT *FROM products where productID IN(2,3)
+UNION ALL SELECT*FROM products where productID IN(10,40)
+select *from products where productID IN(2,3) 
+UNION --İki sorgunun sonuçlarını birleştirir ve tekrar eden satırları kaldırır
+SELECT *from products where productID IN(3,20)
+select *from products where productID IN(2,3) 
+UNION ALL--Sonuçları birleştirir ama tekrar eden satırları kaldırmaz
+SELECT *from products where productID IN(3,20)
+
+SELECT  ProductID,productName,UnitPrice from products union select 99999999999,'toplam',(select sum(UnitPrice)from products)---ProductID,ProductName, UnitPrice ile select iel yazdığımız 99999 ,toplam ,sum(price) ı birleştir en sona ekliyor 
+
+select floor(123.45),floor(-123.45)
