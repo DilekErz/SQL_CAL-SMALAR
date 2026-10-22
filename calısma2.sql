@@ -215,6 +215,10 @@ select datepart (month,'2003/08/25') as monthbul
 select datepart(hour,'2003/08/25 08:36')as dogumsaat
 select datepart(minute,'2003/08/25 08:36')as dogumdakikdasıbul
 
+select datediff(hour,'2005/09/22',getdate())as sinemdoğumsaatfark
+select datediff(hour,'2003/08/25',getdate()) as dilekdoğumsaatfark
+select*, coalesce (shipRegion,'***') as yıldızılısütün from orders
+
 select min(unitPrice) from products
 select max(unitPrice) from products
 select avg(unitprice) from products
