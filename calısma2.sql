@@ -159,3 +159,6 @@ SELECT *from products where productID IN(3,20)
 SELECT  ProductID,productName,UnitPrice from products union select 99999999999,'toplam',(select sum(UnitPrice)from products)---ProductID,ProductName, UnitPrice ile select iel yazdığımız 99999 ,toplam ,sum(price) ı birleştir en sona ekliyor 
 
 select floor(123.45),floor(-123.45)
+
+select ceiling(123.45),ceiling(-123.45)
+select pi();
