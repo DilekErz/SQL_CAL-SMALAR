@@ -19,15 +19,15 @@
 
 
 
-const prompt=require("prompt-sync")();
-let x=Number(prompt("sayi gir:"))
-let ciftsayi = x%2;
-let teksayi =x%2===1;
+// const prompt=require("prompt-sync")();
+// let x=Number(prompt("sayi gir:"))
+// let ciftsayi = x%2;
+// let teksayi =x%2===1;
 
-let nasiptevarsa=Boolean(ciftsayi===0 );
-let kısmmettenöteyeyolyok=Boolean(teksayi===1)
-// let yazıekle="çift"===Boolean(nasiptevarsa);
-console.log(`${Number(!nasiptevarsa)} oldu  `);
+// let nasiptevarsa=Boolean(ciftsayi===0 );
+// let kısmmettenöteyeyolyok=Boolean(teksayi===1)
+// // let yazıekle="çift"===Boolean(nasiptevarsa);
+// console.log(`${Number(!nasiptevarsa)} oldu  `);
 
 
 
@@ -35,18 +35,65 @@ console.log(`${Number(!nasiptevarsa)} oldu  `);
 // let x= Number(prompt("sayi gir:"));
 // let  (x%2)
 
-const prompt=require("prompt-sync")();
-let x=Number(prompt("sayi gir:"))
-let ciftsayi = x%2;
-let teksayi =x%2===1;
+// const prompt=require("prompt-sync")();
+// let x=Number(prompt("sayi gir:"))
+// let ciftsayi = x%2;
+// let teksayi =x%2===1;
 
-let nasiptevarsa=Boolean(ciftsayi===0 );
-let kısmmettenöteyeyolyok=Boolean(teksayi===1)
-Boolean(nasiptevarsa)=="çift";
-Boolean(!nasiptevarsa)=="tek";
-console.log(`${Number(!nasiptevarsa)} oldu  `);
-console.log(Boolean (nasiptevarsa));
-console.log(nasiptevarsa);
+// let nasiptevarsa=Boolean(ciftsayi===0 );
+// let kısmmettenöteyeyolyok=Boolean(teksayi===1)
+// Boolean(nasiptevarsa)=="çift";
+// Boolean(!nasiptevarsa)=="tek";
+// console.log(`${Number(!nasiptevarsa)} oldu  `);
+// console.log(Boolean (nasiptevarsa));
+// console.log(nasiptevarsa);
 
 
 
+
+//  algoritma mantığıyla gidelim herşeyi sırasıyla ve sıralı aşamaları detaylı düşün 
+
+// const prompt= require("prompt-sync")();
+// let x=Number(prompt("kullanıcı çift veya tek sayi girsin:"))
+// let y=x%2;
+// let çift =Boolean(Number(y));
+// let sorgu=new Boolean(çift);
+
+
+// console.log( x , y,çift.toString());
+
+
+// let sorgu=Boolean(y===1);
+
+//  sorgu="tek"; //atmama sırasını düşün 
+
+//  console.log(`kullanıcı ${x} kalanı${y} sonuc ${sorgu}`);
+
+
+
+
+const prompt= require("prompt-sync")();
+let x=Number(prompt("kullanıcı çift veya tek sayi girsin:"))
+let y=x%2;
+let sorgu=Boolean(Number(y))
+let birse=1;
+
+
+
+function sayiyibul(calback){
+calback(sorgu); // calback fonksiyon hataları
+}
+
+function cift (y){
+     y =x%2;
+    // let sorgu=Boolean(y);
+    console.log(`kulanıcının girdiği sayi ${y}çift sayidir`);
+ return
+}
+function tek(sorgu){
+     y=x%2;
+    // let sorgu=Boolean(y)
+    console.log(`kulanıcının girdiği sayi ${y} tek sayidir`)
+    return
+}
+sayiyibul(y);
